@@ -9,7 +9,7 @@
 <style>
   :root {
     --bg: #0a0a0f;
-    --surface: rgba(255,255,255,0.055);
+    --surface: rgba(255, 255, 255, 0);
     --surface-hover: rgba(255,255,255,0.09);
     --border: rgba(255,255,255,0.10);
     --border-strong: rgba(255,255,255,0.18);
@@ -28,39 +28,11 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
+    background: black; /* Changed to solid black background */
     color: var(--text);
     font-family: 'Mona Sans', system-ui, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
-  }
-
-  /* ── Grain texture overlay ── */
-  .grain {
-    position: fixed;
-    inset: -200%;
-    width: 400%;
-    height: 400%;
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0.038;
-    animation: grain-shift 0.5s steps(1) infinite;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-size: 256px 256px;
-    mix-blend-mode: overlay;
-  }
-  @keyframes grain-shift {
-    0%   { transform: translate(0, 0); }
-    10%  { transform: translate(-3%, -5%); }
-    20%  { transform: translate(-7%, 2%); }
-    30%  { transform: translate(4%, -6%); }
-    40%  { transform: translate(-4%, 8%); }
-    50%  { transform: translate(-6%, -3%); }
-    60%  { transform: translate(7%, 5%); }
-    70%  { transform: translate(2%, -8%); }
-    80%  { transform: translate(-5%, 4%); }
-    90%  { transform: translate(6%, 2%); }
-    100% { transform: translate(-2%, 6%); }
   }
 
   /* ── Animated background ── */
@@ -108,8 +80,8 @@
     background: var(--surface);
     backdrop-filter: var(--blur);
     -webkit-backdrop-filter: var(--blur);
-    border: 1px solid var(--border);
-    border-radius: 20px;
+    border: 1px dashed var(--border); /* Changed to dashed stroke */
+    border-radius: 30px;
   }
 
   /* ── Nav ── */
@@ -122,8 +94,8 @@
     background: rgba(10,10,15,0.6);
     backdrop-filter: blur(30px) saturate(200%);
     -webkit-backdrop-filter: blur(30px) saturate(200%);
-    border: 1px solid var(--border);
-    border-radius: 20px;
+    border: 1px dashed var(--border); /* Changed to dashed stroke */
+    border-radius: 30px;
     position: sticky;
     top: 20px;
     z-index: 100;
@@ -238,11 +210,11 @@
   .btn-primary {
     background: #0000ff;
     color: #fff;
-    box-shadow: 0 4px 24px rgba(91,141,255,0.35);
+    box-shadow: none; /* Removed glow effect */
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(91,141,255,0.45);
+    box-shadow: none; /* Removed glow effect */
   }
 
   .btn-ghost {
@@ -262,18 +234,15 @@
   .avatar-wrap {
     position: relative;
     flex-shrink: 0;
+    margin-left: 0px; /* Added margin from the left */
+    margin-top: 0px; /* Added margin from the top */
   }
-  .avatar-ring {
-    width: 200px;
-    height: 230px;
-    border-radius: 36px;
-    padding: 2.5px;
-    background: #ffffff;
-  }
+
   .avatar-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 34px;
+    width: 280px; /* Scaled avatar image */
+    height: 330px; /* Scaled avatar image */
+    border-radius: 30px; /* Ensures circular shape */
+    border: none; /* Removed dashed stroke */
     background: url('gitphoto.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
@@ -283,23 +252,23 @@
     color: var(--text);
     overflow: hidden;
   }
-  .avatar-info {
-    margin-top: 16px;
-    text-align: center;
-  }
-  .avatar-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--accent3);
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    padding: 8px 45px;
-    border-radius: 999px;
+
+  .avatar-ring {
+    display: none; /* Removed the avatar ring */
   }
 
+  /* Remove decorative background lights to keep solid black background */
+  .grain,
+  .bg-orbs,
+  .orb,
+  .orb-1,
+  .orb-2,
+  .orb-3,
+  .project-glow {
+    display: none !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
   /* ── Section label ── */
   .section-label {
     font-size: 0.7rem;
@@ -623,12 +592,7 @@
         </div>
       </div>
       <div class="avatar-wrap">
-        <div class="avatar-ring">
-          <div class="avatar-inner"></div>
-        </div>
-        <div class="avatar-info">
-          <span class="avatar-badge">Munich, DE</span>
-        </div>
+        <div class="avatar-inner"></div>
       </div>
     </div>
   </section>
@@ -645,9 +609,9 @@
         <div class="chips">
           <span class="chip chip-accent">Flutter</span>
           <span class="chip chip-accent">Dart</span>
-          <span class="chip chip-green">IoT</span>
-          <span class="chip chip-green">Real-time</span>
-          <span class="chip chip-purple">Mobile</span>
+          <span class="chip">IoT</span>
+          <span class="chip">Real-time</span>
+          <span class="chip">Mobile</span>
         </div>
       </div>
     </div>
