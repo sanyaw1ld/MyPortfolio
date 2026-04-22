@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Mona+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
+    --bg: #000000;
     --surface: rgba(255, 255, 255, 0);
     --surface-hover: rgba(255,255,255,0.09);
     --border: rgba(255, 255, 255, 0.158);
@@ -25,12 +25,18 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg);
+    height: 100%;
+  }
 
   body {
-    background: url('background.png') no-repeat center center;
+    background-color: var(--bg);
+    background-image: linear-gradient(var(--bg), var(--bg)), url('background.png');
+    background-repeat: no-repeat;
+    background-position: center center;
     background-size: cover;
-    background-size: 100%;
     background-attachment: fixed;
     color: var(--text);
     font-family: 'Mona Sans', system-ui, sans-serif;
